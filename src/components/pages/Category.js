@@ -1,17 +1,19 @@
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
-import dateToStr from "../../utils/dateToStr";
-import { getAllPosts } from "../../redux/postsRedux";
 
-const Home = () => {
-  const posts = useSelector(getAllPosts);
+import { getPostsByCategory } from "../../redux/postsRedux";
+import dateToStr from "../../utils/dateToStr";
+
+const Category = () => {
+  const { categoryId } = useParams();
+  const posts = useSelector((state) => getPostsByCategory(state, categoryId));
 
   return (
     <div>
-      <h1>All posts</h1>
+      <h1>Category: {categoryId}</h1>
 
-      {posts.length === 0 && <p>No posts available.</p>}
+      {posts.length === 0 && <p>No posts in this category.</p>}
 
       {posts.map((post) => (
         <Card key={post.id} className="mb-3">
@@ -35,4 +37,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Category;

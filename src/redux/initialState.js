@@ -1,4 +1,5 @@
 const initialState = {
+  categories: ["Sport", "News", "Movies"],
   posts: [
     {
       id: "1",
@@ -7,8 +8,9 @@ const initialState = {
         "React is one of the most popular JavaScript libraries...",
       content:
         "React makes building user interfaces easier thanks to reusable components and efficient rendering.",
-      publishedDate: "2026-06-01",
+      publishedDate: new Date("2022-02-02"),
       author: "John Doe",
+      category: "News",
     },
     {
       id: "2",
@@ -16,8 +18,9 @@ const initialState = {
       shortDescription: "Redux helps manage global application state...",
       content:
         "Redux stores the entire application state in one place and makes it predictable.",
-      publishedDate: "2026-06-05",
+      publishedDate: new Date("2022-02-02"),
       author: "Jane Smith",
+      category: "Sport",
     },
     {
       id: "3",
@@ -26,8 +29,9 @@ const initialState = {
         "React Router enables navigation in React applications...",
       content:
         "Using React Router we can build single page applications with multiple routes.",
-      publishedDate: "2026-06-10",
+      publishedDate: new Date("2022-02-02"),
       author: "Mike Brown",
+      category: "Movies",
     },
   ],
 };

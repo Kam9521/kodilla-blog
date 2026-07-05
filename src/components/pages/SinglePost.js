@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, Navigate, Link } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
+import dateToStr from "../../utils/dateToStr";
 
 import { getPostById, removePost } from "../../redux/postsRedux";
 
@@ -44,10 +45,12 @@ const SinglePost = () => {
       <p>
         <strong>Author:</strong> {post.author}
         <br />
-        <strong>Published:</strong> {post.publishedDate}
+        <strong>Published:</strong> {dateToStr(post.publishedDate)}
+        <br />
+        <strong>Category:</strong> {post.category}
       </p>
 
-      <p>{post.content}</p>
+      <p dangerouslySetInnerHTML={{ __html: post.content }} />
 
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>
