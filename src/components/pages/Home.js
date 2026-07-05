@@ -11,6 +11,8 @@ const Home = () => {
     <div>
       <h1>All posts</h1>
 
+      {posts.length === 0 && <p>No posts available.</p>}
+
       {posts.map((post) => (
         <Card key={post.id} className="mb-3">
           <Card.Body>
