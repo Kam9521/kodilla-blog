@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, Navigate, Link } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
 import dateToStr from "../../utils/dateToStr";
+import DOMPurify from "dompurify";
 
 import { getPostById, removePost } from "../../redux/postsRedux";
 
@@ -50,7 +51,11 @@ const SinglePost = () => {
         <strong>Category:</strong> {post.category}
       </p>
 
-      <p dangerouslySetInnerHTML={{ __html: post.content }} />
+      <div
+        dangerouslySetInnerHTML={{
+          __html: DOMPurify.sanitize(post.content),
+        }}
+      />
 
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>

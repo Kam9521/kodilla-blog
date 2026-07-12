@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
@@ -23,6 +23,24 @@ const PostForm = ({ action, actionText, ...props }) => {
   const [dateError, setDateError] = useState(false);
   const categories = useSelector(getAllCategories);
   const [category, setCategory] = useState(props.category || categories[0]);
+  useEffect(() => {
+    if (props.title !== undefined) {
+      setTitle(props.title || "");
+      setAuthor(props.author || "");
+      setPublishedDate(props.publishedDate || null);
+      setShortDescription(props.shortDescription || "");
+      setContent(props.content || "");
+      setCategory(props.category || categories[0] || "");
+    }
+  }, [
+    props.title,
+    props.author,
+    props.publishedDate,
+    props.shortDescription,
+    props.content,
+    props.category,
+    categories,
+  ]);
 
   const {
     register,
@@ -126,7 +144,11 @@ const PostForm = ({ action, actionText, ...props }) => {
 
       <Form.Group className="mb-3" controlId="formContent">
         <Form.Label>Main content</Form.Label>
-        <ReactQuill theme="snow" value={content} onChange={setContent} />
+        <ReactQuill
+          theme="snow"
+          value={content}
+          onChange={(value) => setContent(value)}
+        />
         {contentError && (
           <small className="d-block form-text text-danger mt-2">
             Content can't be empty
